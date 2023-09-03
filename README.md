@@ -109,5 +109,19 @@ ansible ubuntu1 -a "hostname"
 ansible ubuntu1 -a "date"
 ansible ubuntu1 -a "whoami"
 
+# Let us copy a file from our controller to ubuntu1
+# First, create a file in the home folder - hello.txt - with some contents
+
+echo "Hello World" >> hello.txt
+ansible ubuntu1 -m copy -a "src=~/hello.txt dest=~"
+
+# Let us check if this file has been copied onto ubuntu1 (inside home folder)
+ansible ubuntu1 -m stat -a "path=~/hello.txt"
+
+# Create a group
+ansible ubuntu1 -b -m group -a "name=accenture state=present"
+# Add a user to this group
+ansible ubuntu1 -b -m user -a "name=anand group=accenture createhome=yes"
+
 ```
 
