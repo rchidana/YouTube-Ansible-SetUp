@@ -80,3 +80,34 @@ host_key_checking=False
 
 ```
 
+<br> Let us make an entry in /etc/ansible/hosts file to add details about our 'ubuntu1' VM so that we can control it </br>
+
+```
+# Need root privilege for this
+sudo su
+cd /etc/ansible
+vi hosts
+
+# Append the following at the end of the file
+[ubuntu1]
+192.168.10.20
+
+[ubuntu1:vars]
+ansible_connection=ssh
+ansible_user=vagrant
+ansible_ssh_pass=vagrant
+
+```
+
+<br> All settings are now done, let us try running some ad-hoc commands against the server ubuntu1
+
+```
+# You can run these commands from any location and you do not need root privilege
+# -vvvv is for printing verbose information
+ansible ubuntu1 -m ping -vvvv
+ansible ubuntu1 -a "hostname"
+ansible ubuntu1 -a "date"
+ansible ubuntu1 -a "whoami"
+
+```
+
