@@ -64,4 +64,19 @@ ansible localhost -m "ping"
 ansible localhost -a "hostname"
 
 ```
+<br> Ansible configurations to run play-books </br>
+
+```
+# Auto-generate /etc/ansible/ansible.cfg
+# You would need root privilege to create & modify ansible.cfg
+sudo su
+cd /etc/ansible
+ansible-config init --disabled > ansible.cfg
+
+# In order to disable strict key checking, modify the following flag in ansible.cfg
+vi ansible.cfg
+# Search for the following line and edit it as follows
+host_key_checking=False
+
+```
 
